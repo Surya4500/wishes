@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy 20th Birthday 💖</title>
+
+<style>
+html, body {
+    margin: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    overflow-x: hidden;
+
+    background: url("bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* ✨ Title */
+.highlight {
+    color: black;
+    font-size: 52px;
+    text-shadow: 2px 2px 10px rgba(255,255,255,0.7);
+    margin-top: 30px;
+}
+
+/* 🎬 Lines */
+.line {
+    opacity: 0;
+    transform: translateY(20px);
+    font-size: 32px;
+    color: black;
+    margin: 20px;
+    transition: 1s;
+    text-shadow: 2px 2px 8px rgba(255,255,255,0.7);
+}
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 🖼️ BIG PHOTO */
+.photo {
+    display: none;
+    margin-top: 30px;
+}
+.photo img {
+    width: 450px;  /* BIGGER */
+    border-radius: 20px;
+    border: 5px solid white;
+    box-shadow: 0 0 30px rgba(255,255,255,0.9);
+}
+
+/* 💌 Name */
+.from-name {
+    font-size: 28px;
+    color: black;
+    opacity: 0;
+    transition: 1s;
+    margin-top: 25px;
+    text-shadow: 2px 2px 8px rgba(255,255,255,0.7);
+}
+
+/* 🎂 Cake Section */
+#cakeSection {
+    display: none;
+    margin-top: 30px;
+}
+#cake {
+    width: 220px;
+    transition: 1s;
+}
+
+/* 💥 Popup */
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 65px;
+    color: black;
+    text-shadow: 0 0 25px pink;
+}
+.showPopup {
+    animation: popUp 1s forwards;
+}
+@keyframes popUp {
+    to { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* 🎈 BIG Balloons */
+.balloon {
+    position: fixed;
+    bottom: -100px;
+    font-size: 70px;
+    animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+    to { transform: translateY(-100vh); }
+}
+
+/* 🎵 Button */
+button {
+    padding: 10px 20px;
+    background: #ff69b4;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    font-size: 18px;
+    margin: 10px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1 class="highlight">
+🎉 Happy 20th Birthday to my most favorite person 🥳🎁🎀
+</h1>
+
+<div id="content"></div>
+
+<!-- 🖼️ BIG PHOTO -->
+<div class="photo" id="photoBox">
+    <img src="tuvi.jpg">
+</div>
+
+<!-- 💌 Name -->
+<p class="from-name" id="fromName">
+— Best wishes, Surya 💌
+</p>
+
+<!-- 🎂 Cake -->
+<div id="cakeSection">
+    <h2 style="color:black;">🎂 Cut the Cake</h2>
+    <img id="cake" src="https://cdn.pixabay.com/photo/2016/03/05/19/02/birthday-1238313_1280.png">
+    <br>
+    <button onclick="cutCake()">🍰 Cut Cake</button>
+</div>
+
+<!-- 💥 Popup -->
+<div id="popup">💖 Happy 20s Tuviii </div>
+
+<!-- 🎵 Auto Music -->
+<audio src="https://www.bensound.com/bensound-music/bensound-love.mp3" autoplay loop></audio>
+
+<script>
+
+/* 🎬 Message */
+const lines = [
+"You are not just my best friend, you are my safe place, my happiness, and my biggest support. 💖",
+"Every moment with you is special, and I’m so lucky to have you in my life.",
+"",
+"From all the silly talks to deep conversations, from laughter to tears — everything feels perfect with you. 🥺✨",
+"",
+"I wish your 20th year is filled with love, success, crazy fun, and all your dreams coming true ✨",
+"",
+"No matter what happens, I will always be there for you 💕"
+];
+
+let index = 0;
+
+function showLines() {
+    if (index < lines.length) {
+        let p = document.createElement("p");
+        p.className = "line";
+        p.innerText = lines[index];
+
+        document.getElementById("content").appendChild(p);
+
+        setTimeout(() => p.classList.add("show"), 100);
+
+        index++;
+
+        if (index === lines.length) {
+            setTimeout(() => {
+                document.getElementById("photoBox").style.display = "block";
+            }, 1000);
+        }
+
+        setTimeout(showLines, 1500);
+    } else {
+        setTimeout(() => {
+            document.getElementById("fromName").style.opacity = 1;
+        }, 1000);
+
+        setTimeout(() => {
+            document.getElementById("cakeSection").style.display = "block";
+        }, 2000);
+    }
+}
+showLines();
+
+/* 🎂 Cake Click */
+function cutCake() {
+    document.getElementById("cake").style.transform = "scale(1.2) rotate(10deg)";
+    setTimeout(() => {
+        document.getElementById("popup").classList.add("showPopup");
+    }, 800);
+}
+
+/* 🎈 Balloons */
+setInterval(() => {
+    let b = document.createElement("div");
+    b.className = "balloon";
+    b.innerHTML = "🎈";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.animationDuration = (4 + Math.random() * 4) + "s";
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(), 8000);
+}, 700);
+
+</script>
+
+</body>
+</html>
